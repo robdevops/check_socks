@@ -28,7 +28,7 @@ echo $?
 The SOCKS server is running but gives an unexpected response:
 ```
 $ /usr/local/bin/check_socks -H 10.0.0.1 -p 1080 
-Connection to 10.0.0.1 22 port [tcp/ssh] succeeded!
+Connection to 10.0.0.1 1080 port [tcp/ssh] succeeded!
 WARNING unexpected result
 
 $ echo $?
@@ -38,7 +38,7 @@ $ echo $?
 The SOCKS server is not running, or a firewall rejects the connection:
 ```
 $ /usr/local/bin/check_socks -H 10.0.0.1 -p 1080
-netcat: connect to 10.0.0.1 port 1081 (tcp) failed: Connection refused
+netcat: connect to 10.0.0.1 port 1080 (tcp) failed: Connection refused
 
 $ echo $?
 2
