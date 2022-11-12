@@ -1,0 +1,38 @@
+#!/bin/bash
+set -euo pipefail
+
+HOST=""
+PORT="1080"
+TIMEOUT=5
+EXPECTED=0500
+
+# Only tested with openbsd netcat 2018
+# This is not an end-to-end test. It just checks if the SOCKS server replies. For that, use curl:
+# curl --max-time 5 -sf --socks5-hostname "10.0.2.4:1080" "https://example.com/" >/dev/null ; echo $?
+
+parse_args() {
+	while getopts ":hH:p:t:" opt; do
+		case $opt in
+		  H ) HOST=$OPTARG ;;
+		  p ) PORT=$OPTARG ;;
+		  t ) TIMEOUT=$OPTARG ;;
+		  : ) echo "Option -$OPTARG requires an argument." && exit 3 ;;
+		  \? ) echo "Invalid option: -$OPTARG" && exit 3 ;;
+		  h ) usage ;;
+		esac
+	done
+	[[ -n $HOST ]] || usage
+}
+
+usage() { echo "Usage: $(basename $0) -H <host> -p <port> [-t timeout]"; exit 3 ;}
+
+parse_args $@
+
+# We rely on netcat verbose stderr for success / failure messages.
+OUTPUT=$(echo 050100 | xxd -r -p | netcat -v -w$TIMEOUT -q0 $HOST $PORT | xxd -p) || exit 1
+
+if [[ "$OUTPUT" != "$EXPECTED" ]] ; then
+	echo WARNING unexpected result
+	exit 2
+fi
+
