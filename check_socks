@@ -32,7 +32,7 @@ parse_args $@
 OUTPUT=$(echo 050100 | xxd -r -p | netcat -v -w$TIMEOUT -q0 $HOST $PORT | xxd -p) || exit 1
 
 if [[ "$OUTPUT" != "$EXPECTED" ]] ; then
-	echo WARNING unexpected result
+	echo "WARNING unexpected result"
 	exit 2
 fi
 

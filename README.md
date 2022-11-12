@@ -25,7 +25,7 @@ echo $?
 0
 ```
 
-The SOCKS server gives an unexpected reply:
+The SOCKS server gives an unexpected response:
 ```
 $ /usr/local/bin/check_socks -H 10.0.0.1 -p 1080 
 Connection to 10.0.0.1 1080 port [tcp/ssh] succeeded!
