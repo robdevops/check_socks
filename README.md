@@ -44,7 +44,7 @@ $ echo $?
 2
 ```
 
-The SOCKS server has hung, or a firewall drops the connection:
+The SOCKS server has hung, or a firewall drops the connection, or there is a routing problem:
 ```
 /usr/local/bin/check_socks -H 10.0.0.1 -p 1080
 netcat: connect to 10.0.0.1 port 1080 (tcp) timed out: Operation now in progress
