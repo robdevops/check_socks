@@ -24,7 +24,7 @@ parse_args() {
 	[[ -n $HOST ]] || usage
 }
 
-usage() { echo "Usage: $(basename $0) -H <host> -p <port> [-t timeout]"; exit 3 ;}
+usage() { echo "Usage: ${0##*/} -H <host> -p <port> [-t timeout]"; exit 3 ;}
 
 parse_args $@
 
